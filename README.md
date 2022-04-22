@@ -18,7 +18,8 @@ TF2 Models Prediction:
 
 1.EfficientDet D1 640x640:
 
-![image](https://user-images.githubusercontent.com/46878296/164758742-5e808d35-442a-4ebd-a4c8-1f032df18e2b.png)
+![image](https://user-images.githubusercontent.com/46878296/164759399-06afea00-a1e3-4b29-9704-7e83aff58361.png)
+
 
 
 Terminal Output:
