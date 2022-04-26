@@ -4,23 +4,23 @@ import os
 
 
 def TF2_download_model(download_url,model_folder_name,model_file_name):
-    if os.path.exists(os.path.join(os.getcwd()+ '\\TF2\TF2_model\\'+model_folder_name)):
+    if os.path.exists(os.path.join(os.getcwd()+ '\\src\\TF2\TF2_model\\'+model_folder_name)):
         print("The required model folder already exist")
-        model_dir= os.getcwd() + '\\TF2\TF2_model\\'+model_folder_name+"\\saved_model"
-    elif os.path.exists(os.path.join(os.getcwd()+ '\\TF2\TF2_model\\'+model_file_name)):
+        model_dir= os.getcwd() + '\\src\\TF2\TF2_model\\'+model_folder_name+"\\saved_model"
+    elif os.path.exists(os.path.join(os.getcwd()+ '\\src\\TF2\TF2_model\\'+model_file_name)):
         print("The required model file already exist")
-        tar = tarfile.open(os.path.join(os.getcwd()+ '\\TF2\TF2_model\\'+model_file_name))
+        tar = tarfile.open(os.path.join(os.getcwd()+ '\\src\\TF2\TF2_model\\'+model_file_name))
         foldername = tar.getnames()[0]
         tar.extractall("TF2\TF2_model")
         tar.close            
-        model_dir= os.getcwd() + '\\TF2\TF2_model\\'+foldername+"\\saved_model"
+        model_dir= os.getcwd() + '\\src\\TF2\TF2_model\\'+foldername+"\\saved_model"
     else:
-        raw_filename = wget.download(download_url,out="TF2\TF2_model")
+        raw_filename = wget.download(download_url,out="\srcTF2\TF2_model")
         tar = tarfile.open(raw_filename)
         foldername = tar.getnames()[0]
         tar.extractall("TF2\TF2_model")
         tar.close            
-        model_dir= os.getcwd() + '\\TF2\TF2_model\\'+foldername+"\\saved_model"
+        model_dir= os.getcwd() + '\\src\\TF2\TF2_model\\'+foldername+"\\saved_model"
     return model_dir
 
 # def detectron_download_model(model,model_config_download_url,model_download_url,model_config_filename,model_name):

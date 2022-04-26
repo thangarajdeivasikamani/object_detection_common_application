@@ -34,7 +34,7 @@ class TF2Predictor:
             print("The Prediction started with"+" " + model + " " + "Model")
             print('------------------------------------------------------------')
             self.model = tf.saved_model.load(model_dir)
-            self.category_index = label_map_util.create_category_index_from_labelmap("TF2\labelmap.pbtxt",use_display_name=True)
+            self.category_index = label_map_util.create_category_index_from_labelmap("src\TF2\labelmap.pbtxt",use_display_name=True)
 
         elif model == "SSD MobileNet v2 320x320":
             print ("The Required "+" " + model + " " + "started downloading")
@@ -47,7 +47,7 @@ class TF2Predictor:
             print("The Prediction started with"+" " + model + " " + "Model")
             print('------------------------------------------------------------')
             self.model = tf.saved_model.load(model_dir)
-            self.category_index = label_map_util.create_category_index_from_labelmap("TF2\labelmap.pbtxt",use_display_name=True)
+            self.category_index = label_map_util.create_category_index_from_labelmap("src\TF2\labelmap.pbtxt",use_display_name=True)
   
         elif model == "SSD MobileNet V2 FPNLite 320x320":
             print ("The Required "+" " + model + " " + "started downloading")
@@ -60,7 +60,7 @@ class TF2Predictor:
             print("The Prediction started with"+" " + model + " " + "Model")
             print('------------------------------------------------------------')
             self.model = tf.saved_model.load(model_dir)
-            self.category_index = label_map_util.create_category_index_from_labelmap("TF2\labelmap.pbtxt",
+            self.category_index = label_map_util.create_category_index_from_labelmap("src\TF2\labelmap.pbtxt",
                                                                                 use_display_name=True)
         elif model == "Faster R-CNN ResNet50 V1 640x640":
             print ("The Required "+" " + model + " " + "started downloading")
@@ -73,7 +73,7 @@ class TF2Predictor:
             print("The Prediction started with"+" " + model + " " + "Model")
             print('------------------------------------------------------------')
             self.model = tf.saved_model.load(model_dir)
-            self.category_index = label_map_util.create_category_index_from_labelmap("TF2\labelmap.pbtxt",
+            self.category_index = label_map_util.create_category_index_from_labelmap("src\TF2\labelmap.pbtxt",
                                                                                 use_display_name=True)
         elif model == "Faster R-CNN ResNet101 V1 640x640":
             print ("The Required "+" " + model + " " + "started downloading")
@@ -86,7 +86,7 @@ class TF2Predictor:
             print("The Prediction started with"+" " + model + " " + "Model")
             print('------------------------------------------------------------')
             self.model = tf.saved_model.load(model_dir)
-            self.category_index = label_map_util.create_category_index_from_labelmap("TF2\labelmap.pbtxt",
+            self.category_index = label_map_util.create_category_index_from_labelmap("src\TF2\labelmap.pbtxt",
                                                                                     use_display_name=True)
         else:
             print("Please select suitable model")
