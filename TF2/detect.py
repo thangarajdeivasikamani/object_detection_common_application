@@ -9,11 +9,11 @@ import glob
 import matplotlib.pyplot as plt
 import cv2
 from operator import itemgetter
-from utils.download_models import TF2_download_model
+from Helpers.download_models import TF2_download_model
 from object_detection.utils import ops as utils_ops
 from object_detection.utils import label_map_util
 from object_detection.utils import visualization_utils as vis_util
-from utils.utils import encodeImageIntoBase64
+from Helpers.utils import encodeImageIntoBase64
 
 # patch tf1 into `utils.ops`
 utils_ops.tf = tf.compat.v1

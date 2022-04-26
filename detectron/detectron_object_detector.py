@@ -3,7 +3,6 @@ import json
 import os
 from detectron2 import model_zoo
 from detectron2.engine import DefaultPredictor
-from utils.download_models import detectron_download_model
 from detectron2.config import get_cfg
 from detectron2.utils.visualizer import Visualizer
 from detectron2.utils.visualizer import ColorMode
@@ -13,77 +12,58 @@ from detectron2.modeling import build_model
 import torch
 import numpy as np
 from PIL import Image
-from utils.utils import encodeImageIntoBase64
+from Helpers.utils import encodeImageIntoBase64
 
 
 class Dectron_Detector:
 
-	def __init__(self,model,filename):
-		self.filename = filename   
-		if model == "R50-FPN":
-			model_config_download_url = 'https://github.com/facebookresearch/detectron2/blob/main/configs/COCO-Detection/faster_rcnn_R_50_FPN_1x.yaml'
-			model_download_url = 'https://dl.fbaipublicfiles.com/detectron2/COCO-Detection/faster_rcnn_R_50_FPN_1x/137257794/model_final_b275ba.pkl'
-			model_config_filename = 'faster_rcnn_R_50_FPN_1x.yaml'
-			model_name = 'model_final_b275ba.pkl'
-			detection_model_dir,detection_model_config = detectron_download_model(model,model_config_download_url,model_download_url,model_config_filename,model_name)
-			number_of_classes_of_model =80
+	def __init__(self,filename,model):
+		self.filename = filename  
+		self.cfg = get_cfg() 
+		self.cfg.MODEL.DEVICE = "cpu"
+		self.cfg.MODEL.ROI_HEADS.SCORE_THRESH_TEST = 0.50 
+		if model == "faster_rcnn_R_50_FPN_1x":
+			print("\n The model selected for detection is:",model)
+			self.model = 'faster_rcnn_R_50_FPN_1x.yaml'
+			self.cfg.merge_from_file(os.path.join(os.getcwd()+ '\\detectron\\detectron_yaml\yaml\\'+'faster_rcnn_R_50_FPN_1x.yaml'))
+			self.cfg.MODEL.WEIGHTS = model_zoo.get_checkpoint_url("COCO-Detection/faster_rcnn_R_50_FPN_1x.yaml")
 
-		elif model =="R50-C4":
-			model_config_download_url = 'https://github.com/facebookresearch/detectron2/blob/main/configs/COCO-Detection/rpn_R_50_C4_1x.yaml'
-			model_download_url = 'https://dl.fbaipublicfiles.com/detectron2/COCO-Detection/rpn_R_50_C4_1x/137258005/model_final_450694.pkl'
-			model_config_filename = 'rpn_R_50_C4_1x.yaml'
-			model_name = 'model_final_450694.pkl'
-			detection_model_dir,detection_model_config = detectron_download_model(model,model_config_download_url,model_download_url,model_config_filename,model_name)
-			number_of_classes_of_model =80
+		elif model == "faster_rcnn_R_50_C4_1x":
+			print("\n The model selected for detection is:",model)
+			self.model = 'faster_rcnn_R_50_C4_1x.yaml'
+			self.cfg.merge_from_file(os.path.join(os.getcwd()+ '\\detectron\\detectron_yaml\yaml\\'+'faster_rcnn_R_50_C4_1x.yaml'))
+			self.cfg.MODEL.WEIGHTS = model_zoo.get_checkpoint_url("COCO-Detection/faster_rcnn_R_50_C4_1x.yaml")
 			
-		elif model =="R101-C4":
-			model_config_download_url = 'https://github.com/facebookresearch/detectron2/blob/main/configs/COCO-Detection/faster_rcnn_R_101_C4_3x.yaml'
-			model_download_url = 'https://dl.fbaipublicfiles.com/detectron2/COCO-Detection/faster_rcnn_R_101_C4_3x/138204752/model_final_298dad.pkl'
-			model_config_filename = 'faster_rcnn_R_101_C4_3x.yaml'
-			model_name = 'model_final_298dad.pkl'
-			detection_model_dir,detection_model_config = detectron_download_model(model,model_config_download_url,model_download_url,model_config_filename,model_name)
-			number_of_classes_of_model =80
+		elif model =="faster_rcnn_R_101_C4_3x":
+			print("\n The model selected for detection is:",model)
+			self.model = 'faster_rcnn_R_101_C4_3x.yaml'
+			self.cfg.merge_from_file(os.path.join(os.getcwd()+ '\\detectron\\detectron_yaml\yaml\\'+'faster_rcnn_R_101_C4_3x.yaml'))
+			self.cfg.MODEL.WEIGHTS = model_zoo.get_checkpoint_url("COCO-Detection/faster_rcnn_R_101_C4_3x.yaml")
 
-		elif model =="R101-FPN":
-			model_config_download_url = 'https://github.com/facebookresearch/detectron2/blob/main/configs/COCO-Detection/faster_rcnn_R_101_FPN_3x.yaml'
-			model_download_url = 'https://dl.fbaipublicfiles.com/detectron2/COCO-Detection/faster_rcnn_R_101_FPN_3x/137851257/model_final_f6e8b1.pkl'
-			model_config_filename = 'faster_rcnn_R_101_FPN_3x.yaml'
-			model_name = 'model_final_f6e8b1.pkl'
-			detection_model_dir,detection_model_config = detectron_download_model(model,model_config_download_url,model_download_url,model_config_filename,model_name)
-			number_of_classes_of_model =80
-		elif model =="X101-FPN":
-			model_config_download_url = 'https://github.com/facebookresearch/detectron2/blob/main/configs/COCO-Detection/faster_rcnn_X_101_32x8d_FPN_3x.yaml'
-			model_download_url = 'https://dl.fbaipublicfiles.com/detectron2/COCO-Detection/faster_rcnn_X_101_32x8d_FPN_3x/139173657/model_final_68b088.pkl'
-			model_config_filename = 'faster_rcnn_X_101_32x8d_FPN_3x.yaml'
-			model_name = 'model_final_68b088.pkl'
-			detection_model_dir,detection_model_config = detectron_download_model(model,model_config_download_url,model_download_url,model_config_filename,model_name)
-			number_of_classes_of_model = 80
+		elif model =="faster_rcnn_R_101_FPN_3x":
+			print("\n The model selected for detection is:",model)
+			self.model = 'faster_rcnn_R_101_FPN_3x.yaml'
+			self.cfg.merge_from_file(os.path.join(os.getcwd()+ '\\detectron\\detectron_yaml\yaml\\'+'faster_rcnn_R_101_FPN_3x.yaml'))
+			self.cfg.MODEL.WEIGHTS = model_zoo.get_checkpoint_url("COCO-Detection/faster_rcnn_R_101_FPN_3x.yaml")
+
+		elif model =="retinanet_R_50_FPN_1x":
+			print("\n The model selected for detection is:",model)
+			self.model = 'retinanet_R_50_FPN_1x.yaml'
+			self.cfg.merge_from_file(os.path.join(os.getcwd()+ '\\detectron\\detectron_yaml\yaml\\'+'retinanet_R_50_FPN_1x.yaml'))
+			self.cfg.MODEL.WEIGHTS = model_zoo.get_checkpoint_url("COCO-Detection/retinanet_R_50_FPN_1x.yaml")
+
+
+	
+		# elif model =="X101-FPN":
+		# 	model_config_download_url = 'https://github.com/facebookresearch/detectron2/blob/main/configs/COCO-Detection/faster_rcnn_X_101_32x8d_FPN_3x.yaml'
+		# 	model_download_url = 'https://dl.fbaipublicfiles.com/detectron2/COCO-Detection/faster_rcnn_X_101_32x8d_FPN_3x/139173657/model_final_68b088.pkl'
+		# 	model_config_filename = 'faster_rcnn_X_101_32x8d_FPN_3x.yaml'
+		# 	model_name = 'model_final_68b088.pkl'
+		# 	detection_model_dir,detection_model_config = detectron_download_model(model,model_config_download_url,model_download_url,model_config_filename,model_name)
+		# 	number_of_classes_of_model = 80
 		else:
 			print("Please choose correct model")
-		# set model and test set
-		#self.model = os.getcwd() + '\\detectron\detectron_models\\'+model+'faster_rcnn_R_50_FPN_1x.yaml'
-		self.model = detection_model_config           
-		# obtain detectron2's default config
-		self.cfg = get_cfg() 
-		# load values from a file
-		self.cfg.merge_from_file(os.getcwd() + "\\detectron\\"+"config.yml")
-	
-		#self.cfg.merge_from_file(model_zoo.get_config_file("COCO-InstanceSegmentation/"+self.model))
-
-		# set device to cpu
-		self.cfg.MODEL.DEVICE = "cpu"
-
-		# get weights 
-		# self.cfg.MODEL.WEIGHTS = model_zoo.get_checkpoint_url("COCO-InstanceSegmentation/"+self.model) 
-		#self.cfg.MODEL.WEIGHTS = "model_final_f10217.pkl"
-		self.cfg.MODEL.WEIGHTS = detection_model_dir
-
-		# set the testing threshold for this model
-		self.cfg.MODEL.ROI_HEADS.SCORE_THRESH_TEST = 0.50
-		# set the class to resolve  the 'roi_heads.box_predictor.cls_score.weight'  warning
-		self.cfg.MODEL.ROI_HEADS.NUM_CLASSES = number_of_classes_of_model
-		# build model from weights
-		#self.cfg.MODEL.WEIGHTS = self.convert_model_for_inference()
+		
 
 	# build model and convert for inference
 	def convert_model_for_inference(self):

@@ -4,12 +4,15 @@ import sys
 import time
 sys.path.insert(0,os.getcwd() + "\TF2")
 sys.path.insert(0,os.getcwd() + "\detectron")
+sys.path.insert(0,os.getcwd() + "\Yolo5")
+sys.path.insert(0,os.getcwd() + "\\utils")
 from flask import Flask, request, jsonify, render_template
 from flask_cors import CORS, cross_origin
-from utils.utils import decodeImage
+from Helpers.utils import decodeImage
 from TF2.detect import TF2Predictor
 from detectron.detectron_object_detector import Dectron_Detector
 from TF2.object_detection.utils import label_map_util
+from Yolo5.Yolo5_detect import DetectorYolov5
 
 os.putenv('LANG', 'en_US.UTF-8')
 os.putenv('LC_ALL', 'en_US.UTF-8')
@@ -48,11 +51,22 @@ def predictRoute():
             print("Time Taken to execute the model",time_taken)
         elif framework == "Detectron2":
             start = time.time()           
-            clApp.objectDetection = Dectron_Detector(model,clApp.filename)
+            clApp.objectDetection = Dectron_Detector(clApp.filename,model)
             result = clApp.objectDetection.inference(clApp.filename)
             end = time.time()
             time_taken =end-start
             print("Time Taken to execute the model",time_taken)
+        
+        elif framework == "YOLO":
+            
+            start = time.time()           
+            clApp.yolo_objectDetection = DetectorYolov5(clApp.filename,model)
+            result = clApp.yolo_objectDetection.detect_action()
+            end = time.time()
+            time_taken =end-start
+            print("Time Taken to execute the model",time_taken)
+        else:
+            print("Please choose the correct framework")
         
     except ValueError as val:
         print(val)
