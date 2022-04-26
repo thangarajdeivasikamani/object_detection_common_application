@@ -31,3 +31,4 @@ jobs:
         with:
           user: __token__
           password: ${{ secrets.object_detection_common_application }}
+          
