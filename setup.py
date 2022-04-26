@@ -70,7 +70,6 @@ setuptools.setup(
         "wrapt==1.12.1",
         "zipp==3.6.0",
         "wget==3.2",
-        "-f https://download.pytorch.org/whl/torch_stable.html",
         "torch==1.10.1+cpu",
         "torchvision==0.11.2+cpu",
         "torchaudio==0.10.1",
