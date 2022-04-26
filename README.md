@@ -3,9 +3,11 @@ This repo will help to predict the object with in image using various framework 
 
 How to use?
 Fork or clone the repo.
-1.Create the separate conda or virtual envoriment.
-2.pip install -r requirements.txt
-3. Run 
+
+- 1.Create the separate conda or virtual envoriment.
+- 2.pip install -r requirements.txt
+- 3. Run 
+
 python clientApp.py
 
 Note:
