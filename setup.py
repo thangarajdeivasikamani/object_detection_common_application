@@ -2,8 +2,8 @@ import setuptools
 
 with open("README.md", "r", encoding="utf-8") as fh:
     long_description = fh.read()
-# with open('requirements.txt') as f:
-#     required_package = f.read().splitlines()
+##with open('requirements.txt') as f:
+##    required_package = f.read().splitlines()
     
 PROJECT_NAME = "object_detection_common_application"
 USER_NAME = "thangarajdeivasikamani"
