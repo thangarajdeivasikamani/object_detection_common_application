@@ -2,7 +2,9 @@ import setuptools
 
 with open("README.md", "r", encoding="utf-8") as fh:
     long_description = fh.read()
-
+with open('requirements.txt') as f:
+    required = f.read().splitlines()
+    
 PROJECT_NAME = "object_detection_common_application"
 USER_NAME = "thangarajdeivasikamani"
 
@@ -26,6 +28,5 @@ setuptools.setup(
     package_dir={"": "src"},
     packages=setuptools.find_packages(where="src"),
     python_requires=">=3.8",
-    install_reqs = parse_requirements('requirements.txt', session='hack')
- 
+    install_requires=required 
 )
