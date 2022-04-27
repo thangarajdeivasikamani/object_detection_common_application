@@ -26,5 +26,6 @@ setuptools.setup(
     package_dir={"": "src"},
     packages=setuptools.find_packages(where="src"),
     python_requires=">=3.8",
-    install_requires="pip install -r requirements.txt"
+    with open("requirements.txt","r",encoding ="utf-8") as fh:
+        install_requires=fh.read()
 )
