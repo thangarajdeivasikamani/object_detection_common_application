@@ -10,7 +10,7 @@ USER_NAME = "thangarajdeivasikamani"
 
 setuptools.setup(
     name=f"{PROJECT_NAME}-{USER_NAME}",
-    version="0.0.3",
+    version="0.0.4",
     author=USER_NAME,
     author_email="Thangarajerode@gmail.com",
     description="Object detection common framework application",
