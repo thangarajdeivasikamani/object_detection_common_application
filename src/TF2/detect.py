@@ -1,3 +1,4 @@
+
 import numpy as np
 import argparse
 import os
@@ -9,10 +10,13 @@ import glob
 import matplotlib.pyplot as plt
 import cv2
 from operator import itemgetter
+import sys
+sys.path.insert(0,os.getcwd() + "\Helpers")
+sys.path.insert(0,os.getcwd() + "\TF2")
 from Helpers.download_models import TF2_download_model
-from object_detection.utils import ops as utils_ops
-from object_detection.utils import label_map_util
-from object_detection.utils import visualization_utils as vis_util
+from TF2.object_detection.utils import ops as utils_ops
+from TF2.object_detection.utils import label_map_util
+from TF2.object_detection.utils import visualization_utils as vis_util
 from Helpers.utils import encodeImageIntoBase64
 
 # patch tf1 into `utils.ops`
@@ -34,7 +38,7 @@ class TF2Predictor:
             print("The Prediction started with"+" " + model + " " + "Model")
             print('------------------------------------------------------------')
             self.model = tf.saved_model.load(model_dir)
-            self.category_index = label_map_util.create_category_index_from_labelmap("src\TF2\labelmap.pbtxt",use_display_name=True)
+            self.category_index = label_map_util.create_category_index_from_labelmap("TF2\labelmap.pbtxt",use_display_name=True)
 
         elif model == "SSD MobileNet v2 320x320":
             print ("The Required "+" " + model + " " + "started downloading")
@@ -47,7 +51,7 @@ class TF2Predictor:
             print("The Prediction started with"+" " + model + " " + "Model")
             print('------------------------------------------------------------')
             self.model = tf.saved_model.load(model_dir)
-            self.category_index = label_map_util.create_category_index_from_labelmap("src\TF2\labelmap.pbtxt",use_display_name=True)
+            self.category_index = label_map_util.create_category_index_from_labelmap("TF2\labelmap.pbtxt",use_display_name=True)
   
         elif model == "SSD MobileNet V2 FPNLite 320x320":
             print ("The Required "+" " + model + " " + "started downloading")
@@ -60,7 +64,7 @@ class TF2Predictor:
             print("The Prediction started with"+" " + model + " " + "Model")
             print('------------------------------------------------------------')
             self.model = tf.saved_model.load(model_dir)
-            self.category_index = label_map_util.create_category_index_from_labelmap("src\TF2\labelmap.pbtxt",
+            self.category_index = label_map_util.create_category_index_from_labelmap("TF2\labelmap.pbtxt",
                                                                                 use_display_name=True)
         elif model == "Faster R-CNN ResNet50 V1 640x640":
             print ("The Required "+" " + model + " " + "started downloading")
@@ -73,7 +77,7 @@ class TF2Predictor:
             print("The Prediction started with"+" " + model + " " + "Model")
             print('------------------------------------------------------------')
             self.model = tf.saved_model.load(model_dir)
-            self.category_index = label_map_util.create_category_index_from_labelmap("src\TF2\labelmap.pbtxt",
+            self.category_index = label_map_util.create_category_index_from_labelmap("TF2\labelmap.pbtxt",
                                                                                 use_display_name=True)
         elif model == "Faster R-CNN ResNet101 V1 640x640":
             print ("The Required "+" " + model + " " + "started downloading")
@@ -86,7 +90,7 @@ class TF2Predictor:
             print("The Prediction started with"+" " + model + " " + "Model")
             print('------------------------------------------------------------')
             self.model = tf.saved_model.load(model_dir)
-            self.category_index = label_map_util.create_category_index_from_labelmap("src\TF2\labelmap.pbtxt",
+            self.category_index = label_map_util.create_category_index_from_labelmap("TF2\labelmap.pbtxt",
                                                                                     use_display_name=True)
         else:
             print("Please select suitable model")

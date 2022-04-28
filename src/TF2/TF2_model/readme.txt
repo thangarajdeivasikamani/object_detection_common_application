@@ -1,1 +1,1 @@
-This folder has TF2 models
+This folder contains TF2 models

@@ -1,6 +1,9 @@
 import cv2 as cv
 import json
 import os
+import sys
+sys.path.insert(0,os.getcwd() + "\detectron")
+sys.path.insert(0,os.getcwd() + "\Helpers")
 from detectron2 import model_zoo
 from detectron2.engine import DefaultPredictor
 from detectron2.config import get_cfg
@@ -25,31 +28,31 @@ class Dectron_Detector:
 		if model == "faster_rcnn_R_50_FPN_1x":
 			print("\n The model selected for detection is:",model)
 			self.model = 'faster_rcnn_R_50_FPN_1x.yaml'
-			self.cfg.merge_from_file(os.path.join(os.getcwd()+ '\\src\\detectron\\detectron_yaml\yaml\\'+'faster_rcnn_R_50_FPN_1x.yaml'))
+			self.cfg.merge_from_file(os.path.join(os.getcwd()+ '\\detectron\\detectron_yaml\yaml\\'+'faster_rcnn_R_50_FPN_1x.yaml'))
 			self.cfg.MODEL.WEIGHTS = model_zoo.get_checkpoint_url("COCO-Detection/faster_rcnn_R_50_FPN_1x.yaml")
 
 		elif model == "faster_rcnn_R_50_C4_1x":
 			print("\n The model selected for detection is:",model)
 			self.model = 'faster_rcnn_R_50_C4_1x.yaml'
-			self.cfg.merge_from_file(os.path.join(os.getcwd()+ '\\src\\detectron\\detectron_yaml\yaml\\'+'faster_rcnn_R_50_C4_1x.yaml'))
+			self.cfg.merge_from_file(os.path.join(os.getcwd()+ '\\detectron\\detectron_yaml\yaml\\'+'faster_rcnn_R_50_C4_1x.yaml'))
 			self.cfg.MODEL.WEIGHTS = model_zoo.get_checkpoint_url("COCO-Detection/faster_rcnn_R_50_C4_1x.yaml")
 			
 		elif model =="faster_rcnn_R_101_C4_3x":
 			print("\n The model selected for detection is:",model)
 			self.model = 'faster_rcnn_R_101_C4_3x.yaml'
-			self.cfg.merge_from_file(os.path.join(os.getcwd()+ '\\src\\detectron\\detectron_yaml\yaml\\'+'faster_rcnn_R_101_C4_3x.yaml'))
+			self.cfg.merge_from_file(os.path.join(os.getcwd()+ '\\detectron\\detectron_yaml\yaml\\'+'faster_rcnn_R_101_C4_3x.yaml'))
 			self.cfg.MODEL.WEIGHTS = model_zoo.get_checkpoint_url("COCO-Detection/faster_rcnn_R_101_C4_3x.yaml")
 
 		elif model =="faster_rcnn_R_101_FPN_3x":
 			print("\n The model selected for detection is:",model)
 			self.model = 'faster_rcnn_R_101_FPN_3x.yaml'
-			self.cfg.merge_from_file(os.path.join(os.getcwd()+ '\\src\\detectron\\detectron_yaml\yaml\\'+'faster_rcnn_R_101_FPN_3x.yaml'))
+			self.cfg.merge_from_file(os.path.join(os.getcwd()+ '\\detectron\\detectron_yaml\yaml\\'+'faster_rcnn_R_101_FPN_3x.yaml'))
 			self.cfg.MODEL.WEIGHTS = model_zoo.get_checkpoint_url("COCO-Detection/faster_rcnn_R_101_FPN_3x.yaml")
 
 		elif model =="retinanet_R_50_FPN_1x":
 			print("\n The model selected for detection is:",model)
 			self.model = 'retinanet_R_50_FPN_1x.yaml'
-			self.cfg.merge_from_file(os.path.join(os.getcwd()+ '\\src\\detectron\\detectron_yaml\yaml\\'+'retinanet_R_50_FPN_1x.yaml'))
+			self.cfg.merge_from_file(os.path.join(os.getcwd()+ '\\detectron\\detectron_yaml\yaml\\'+'retinanet_R_50_FPN_1x.yaml'))
 			self.cfg.MODEL.WEIGHTS = model_zoo.get_checkpoint_url("COCO-Detection/retinanet_R_50_FPN_1x.yaml")
 
 
