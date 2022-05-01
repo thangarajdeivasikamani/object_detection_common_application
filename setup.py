@@ -5,11 +5,11 @@ with open("README.md", "r", encoding="utf-8") as fh:
 ##with open('requirements.txt') as f:
 ##    required_package = f.read().splitlines()
     
-PROJECT_NAME = "object_detection_common_application"
+PROJECT_NAME = "odcommonapp"
 USER_NAME = "thangarajdeivasikamani"
 
 setuptools.setup(
-    name=f"{PROJECT_NAME}-{USER_NAME}",
+    name=f"{PROJECT_NAME}",
     version="0.0.4",
     author=USER_NAME,
     author_email="Thangarajerode@gmail.com",
